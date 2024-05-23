@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks - MockChain</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script defer src="../js/tasks.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MockChain - Tasks</h1>
+  </header>
+  <main>
+    <div class="tasks-page">
+      <h2>Your Tasks</h2>
+      <ul id="tasks-list">
+        <li>Invite a friend: 5 tokens <span class="claim-total" id="invite-total">Total: 0</span> <button class="claim-button" data-task="invite">Claim</button></li>
+        <li>First video upload: 1 token <span class="claim-total" id="first-upload-total">Total: 0</span> <button class="claim-button" data-task="first-upload">Claim</button></li>
+        <li>Daily check-in: 0.1 token <span class="claim-total" id="daily-checkin-total">Total: 0</span> <button class="claim-button" data-task="daily-checkin">Claim</button></li>
+        <li>Rate a video: 0.01 token <span class="claim-total" id="rate-video-total">Total: 0</span> <button class="claim-button" data-task="rate-video">Claim</button></li>
+      </ul>
+      <div id="balance">
+        <p>Total Tokens: <span id="token-balance">0</span></p>
+      </div>
+      <div id="membership">
+        <h3>Purchase Membership</h3>
+        <p><strong>Basic Membership (Free):</strong> Basic features, can rate up to 30 videos per day.</p>
+        <p><strong>Silver Membership (25 Tokens/month):</strong> Ad-free experience, unlimited video ratings.</p>
+        <p><strong>Gold Membership (40 Tokens/month):</strong> Ad-free experience, unlimited video ratings, 3x video recommendation boost.</p>
+        <p><strong>Flash Card (40 Tokens each):</strong> Video gets pushed as the first video to 10 users' video pools, can specify the video to push.</p>
+        <button id="silver-membership">Silver Membership (25 tokens/month)</button>
+        <button id="gold-membership">Gold Membership (40 tokens/month)</button>
+        <button id="flash-card">Flash Card (40 tokens each)</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

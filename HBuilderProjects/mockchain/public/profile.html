@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - MockChain</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script defer src="../js/profile.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MockChain - Profile</h1>
+  </header>
+  <main>
+    <div class="profile-page">
+      <h2>Your Profile</h2>
+      <p>Username: <span id="username"></span></p>
+      <p>Tokens: <span id="token-balance"></span></p>
+      <p>Membership: <span id="membership"></span></p>
+      <p>Flash Cards: <span id="flash-cards"></span></p>
+      <button id="connect-wallet-button">Connect Wallet</button>
+      <button id="record-new-video-button">Record New Video</button>
+      <div id="video-list">
+        <h3>Your Videos</h3>
+        <!-- 动态生成用户视频列表 -->
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - MockChain</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  <script defer src="../js/chat.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MockChain</h1>
+    <nav>
+      <button onclick="window.location.href='video-pool.html'">Video Pool</button>
+      <button onclick="window.location.href='profile.html'">Profile</button>
+      <button onclick="window.location.href='tasks.html'">Tasks</button>
+    </nav>
+  </header>
+  <main>
+    <div class="chat-page">
+      <h2>Chat</h2>
+      <div class="chat-list">
+        <!-- 动态生成聊天用户列表 -->
+      </div>
+      <div class="chat-window">
+        <!-- 动态生成聊天内容 -->
+      </div>
+      <input type="text" id="chat-input" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </main>
+</body>
+</html>
