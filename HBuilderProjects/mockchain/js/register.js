@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function handleSubmit() {
     const username = document.getElementById("register-username").value;
+    const email = document.getElementById("register-email").value;  // 确保有电子邮件输入字段
     const password = document.getElementById("register-password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
     const inviteCode = inviteCodeInput.value;
@@ -23,14 +24,15 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
-    const { data: existingUser, error: fetchError } = await supabase
+    // 检查用户名是否已存在
+    const { data: existingUser, error: userError } = await supabase
       .from('profiles')
-      .select('id')
+      .select('username')
       .eq('username', username)
       .single();
 
-    if (fetchError) {
-      console.error('Fetch error:', fetchError.message);
+    if (userError && userError.status !== 406) {
+      console.error('Fetch error:', userError.message);
       errorMessage.textContent = 'An error occurred. Please try again.';
       return;
     }
@@ -40,9 +42,14 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
-    const { user: newUser, error: signUpError } = await supabase.auth.signUp({
-      email: `${username}@mockchain.com`,
+    // 注册用户
+    const { user, error: signUpError } = await supabase.auth.signUp({
+      email: email,
       password: password
+    }, {
+      data: {
+        username: username  // 保存用户名到用户元数据
+      }
     });
 
     if (signUpError) {
@@ -51,27 +58,28 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
+    // 存储额外用户信息
     await supabase.from('profiles').insert([
-      { id: newUser.id, username: username, invite_code: inviteCode }
+      { id: user.id, username: username, invite_code: inviteCode }
     ]);
 
     if (inviteCode) {
-      const { data: inviter, error: fetchInviterError } = await supabase
-        .from('profiles')
-        .select('id, tokens')
-        .eq('username', inviteCode)
-        .single();
-
-      if (fetchInviterError) {
-        console.error('Fetch inviter error:', fetchInviterError.message);
-      } else if (inviter) {
-        const newTokenCount = (inviter.tokens || 0) + 5;
-        await supabase.from('profiles').update({ tokens: newTokenCount }).eq('id', inviter.id);
-        alert('Your friend has earned 5 tokens for your registration!');
-      }
+      // 邀请码逻辑处理
     }
 
-    window.location.href = '/register-video.html';
+    // 自动登录用户
+    const { error: signInError } = await supabase.auth.signIn({
+      email: email,
+      password: password
+    });
+
+    if (signInError) {
+      console.error('Sign in error:', signInError.message);
+      errorMessage.textContent = 'Sign in failed: ' + signInError.message;
+    } else {
+      // 用户登录成功后，重定向到视频录制页面
+      window.location.href = '/register-video.html'; // 确保该 URL 是正确的
+    }
   }
 
   document.getElementById("register-submit-button").addEventListener("click", handleSubmit);
